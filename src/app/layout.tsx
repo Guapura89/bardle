@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import React from 'react';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Bardle",
-  description: "Bardle Official",
+  title: 'Bardle',
+  description: 'Bardle Official',
 };
 
 export default function RootLayout({
