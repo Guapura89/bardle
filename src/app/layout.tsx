@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Bardle',
-  description: 'Bardle Official One',
+  description: 'Bardle Official',
 };
 
 export default function RootLayout({
