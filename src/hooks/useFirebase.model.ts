@@ -1,10 +1,9 @@
-export type champ = {
-  id: string;
+export type Champ = {
   roleChamp: string[];
   genderChamp: string;
   titleChamp: string;
   partypeChamp: string;
-  shortname: string;
+  shortName: string;
   displayName: string;
   rangeType: string[];
   quotesStack: string[];
@@ -14,4 +13,3 @@ export type champ = {
   regionFrom: string[];
   releaseDate: string;
 };
-

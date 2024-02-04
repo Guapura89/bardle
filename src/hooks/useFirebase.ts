@@ -1,6 +1,5 @@
 'use client';
 import {
-  getFirestore,
   collection,
   query,
   getDocs,
@@ -14,10 +13,10 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
-import { champ } from './useFirebase.model';
+import { Champ } from './useFirebase.model';
 
 export const useFirebase = () => {
-  const getChamps = async () => {
+  const getAllChamps = async () => {
     const snap = await getDocs(collection(db, 'champs'));
     const data = snap.docs.map((doc) => ({
       id: doc.id,
@@ -28,28 +27,30 @@ export const useFirebase = () => {
   };
 
   const getChampByName = async (champ: string) => {
-    const snap = await getDocs(query(collection(db, 'champs'), where('shortname', '==', champ)));
+    const snap = await getDocs(query(collection(db, 'champs'), where('shortName', '==', champ)));
     const data = snap.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
 
-    console.log(data);
+    return data[0];
+  };
+
+  const addChamp = (data: Champ) => {
+    addDoc(collection(db, 'champs'), data)
+      .then((res) => {
+        console.log(res.id);
+        return true;
+      })
+      .catch((err) => {
+        console.log(err);
+        return false;
+      });
   };
 
   return {
-    getChamps,
+    getAllChamps,
     getChampByName,
+    addChamp,
   };
 };
-
-// export const getChamps = async () => {
-//   const snap = await getDocs(collection(db, 'champs'));
-//   const data = snap.docs.map((doc) => ({
-//     id: doc.id,
-//     ...doc.data(),
-//   }));
-
-//   console.log(data);
-// };
-
