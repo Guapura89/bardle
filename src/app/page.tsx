@@ -20,10 +20,6 @@ import { ReactElement } from 'react';
 function Home() {
   const { classicSelect, quoteSelect, abilitySelect, playerSelect, emojiSelect, splashSelect } = useGameSelect();
 
-  const handleAddData = () => {
-    console.log('Hola');
-  };
-
   return (
     <>
       <Head>
