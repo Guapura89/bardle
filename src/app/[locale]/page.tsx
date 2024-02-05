@@ -1,6 +1,6 @@
 'use client';
 import Head from 'next/head';
-import Link from 'next/link';
+import { Link, useRouter, usePathname } from '@/components/LocaleSwitcher';
 import { Tooltip } from 'react-tooltip';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 import { TiGroup, TiFlash } from 'react-icons/ti';
@@ -16,10 +16,13 @@ import {
 } from '@/components/GameModeSelect';
 import { useGameSelect } from '@/store/gameSelectStore';
 import { ReactElement } from 'react';
+import { useTranslations } from 'next-intl';
 
 function Home() {
   const { classicSelect, quoteSelect, abilitySelect, playerSelect, emojiSelect, splashSelect } = useGameSelect();
-
+  const t = useTranslations('Index');
+  const route = useRouter();
+  const path = usePathname();
   return (
     <>
       <Head>
@@ -43,6 +46,9 @@ function Home() {
           <div className="2xl:h-[95%] grid-cols-2 col-start-2 col-span-10 lg:col-span-6 lg:col-start-2 2xl:col-start-2 2xl:col-span-4">
             <div className="h-full grid grid-cols-1 grid-rows-7 md:grid-cols-2 md:grid-rows-6 lg:grid-cols-4 lg:grid-rows-5 xl:grid-cols-4 xl:grid-rows-5 2xl:grid-rows-6 2xl:grid-cols-4 gap-3 mx-10">
               {/* Classic card */}
+              <h1>{t('test')}</h1>
+              <button onClick={() => route.replace(path, { locale: 'es' })}>es</button>
+              <button onClick={() => route.replace(path, { locale: 'en' })}>en</button>
               <div
                 className={`h-full relative ${
                   classicSelect.mode === 'Classic' ? 'classicBack' : 'classicBackRush'
