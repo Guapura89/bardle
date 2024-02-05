@@ -14,7 +14,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
 import { Champ } from './useFirebase.model';
-import { generateDailyNumber, generateYesterdayNumber } from '@/utils/getRandomNumber';
+import { generateDailyNumber, generateYesterdayNumber } from '@/utils/classicModeNumber';
 
 export const useFirebase = () => {
   const getAllChamps = async () => {
