@@ -1,24 +1,5 @@
 import { create } from 'zustand';
-
-interface GameSelectValuesType {
-  mode: string;
-  href: string;
-}
-
-interface GameSelectType {
-  classicSelect: GameSelectValuesType;
-  quoteSelect: GameSelectValuesType;
-  abilitySelect: GameSelectValuesType;
-  emojiSelect: GameSelectValuesType;
-  playerSelect: GameSelectValuesType;
-  splashSelect: GameSelectValuesType;
-  setClassicSelect: (data: any) => void;
-  setQuoteSelect: (data: any) => void;
-  setAbilitySelect: (data: any) => void;
-  setEmojiSelect: (data: any) => void;
-  setPlayerSelect: (data: any) => void;
-  setSplashSelect: (data: any) => void;
-}
+import { GameSelectType } from './store.model';
 
 export const useGameSelect = create<GameSelectType>((set) => ({
   classicSelect: { mode: 'Classic', href: '/daily' },
