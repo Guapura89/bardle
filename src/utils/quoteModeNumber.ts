@@ -3,7 +3,7 @@ import { today, month, year } from './classicModeNumber';
 
 // Daily Number Generation in Quote mode
 export function generateQuoteDailyNumber(): number {
-  const day: string = (today.getDate() + 61).toString().padStart(2, '0');
+  const day: string = (today.getUTCDate() + 61).toString().padStart(2, '0');
   const dateStr: string = `${year}-${month}-${day + 10}`;
   const hash: string = crypto.createHash('sha256').update(dateStr).digest('hex');
   const hashNum: number = parseInt(hash.slice(0, 8), 16);
@@ -14,7 +14,7 @@ export function generateQuoteDailyNumber(): number {
 
 // Yesterday Number Generation in Quote mode
 export function generateQuoteYesterdayNumber(): number {
-  const day: string = (today.getDate() + 60).toString().padStart(2, '0');
+  const day: string = (today.getUTCDate() + 60).toString().padStart(2, '0');
   const dateStr: string = `${year}-${month}-${day + 10}`;
   const hash: string = crypto.createHash('sha256').update(dateStr).digest('hex');
   const hashNum: number = parseInt(hash.slice(0, 8), 16);

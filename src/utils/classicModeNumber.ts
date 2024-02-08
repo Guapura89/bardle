@@ -1,12 +1,12 @@
 import crypto from 'crypto';
 
 export const today: Date = new Date();
-export const year: number = today.getFullYear();
-export const month: string = (today.getMonth() + 1).toString().padStart(2, '0');
+export const year: number = today.getUTCFullYear();
+export const month: string = (today.getUTCMonth() + 1).toString().padStart(2, '0');
 
 // Daily Number Generation in Classic mode
 export function generateDailyNumber(): number {
-  const day: string = today.getDate().toString().padStart(2, '0');
+  const day: string = today.getUTCDate().toString().padStart(2, '0');
   const dateStr: string = `${year}-${month}-${day}`;
   const hash: string = crypto.createHash('sha256').update(dateStr).digest('hex');
   const hashNum: number = parseInt(hash.slice(0, 8), 16);
@@ -17,7 +17,7 @@ export function generateDailyNumber(): number {
 
 // Yesterday Number Generation in Classic mode
 export function generateYesterdayNumber(): number {
-  const day: string = (today.getDate() - 1).toString().padStart(2, '0');
+  const day: string = (today.getUTCDate() - 1).toString().padStart(2, '0');
   const dateStr: string = `${year}-${month}-${day}`;
   const hash: string = crypto.createHash('sha256').update(dateStr).digest('hex');
   const hashNum: number = parseInt(hash.slice(0, 8), 16);

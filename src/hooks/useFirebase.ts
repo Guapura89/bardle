@@ -13,18 +13,33 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from '@/firebaseConfig';
-import { Champ } from './useFirebase.model';
+import { Champ } from '@/store/store.model';
 import { generateDailyNumber, generateYesterdayNumber } from '@/utils/classicModeNumber';
+import { useChampStore } from '@/store/champStore';
 
 export const useFirebase = () => {
+  const { setChamps, champs } = useChampStore();
+
   const getAllChamps = async () => {
     const snap = await getDocs(collection(db, 'champs'));
-    const data = snap.docs.map((doc) => ({
+    const data: Champ[] = snap.docs.map((doc) => ({
+      roleChamp: doc.data().roleChamp,
+      genderChamp: doc.data().genderChamp,
+      titleChamp: doc.data().titleChamp,
+      partypeChamp: doc.data().partypeChamp,
+      shortName: doc.data().shortName,
+      displayName: doc.data().displayName,
+      rangeType: doc.data().rangeType,
+      quotesStack: doc.data().quotesStack,
+      specieChamp: doc.data().specieChamp,
+      positionChamp: doc.data().positionChamp,
+      emojiStack: doc.data().emojiStack,
+      regionFrom: doc.data().regionFrom,
+      releaseDate: doc.data().releaseDate,
       id: doc.id,
-      ...doc.data(),
     }));
 
-    return data;
+    setChamps(data);
   };
 
   const getChampByName = async (champ: string) => {
@@ -38,14 +53,12 @@ export const useFirebase = () => {
   };
 
   const getDailyChamp = async () => {
-    const champs = await getAllChamps();
-    const daily = champs.filter((item, index) => index === generateDailyNumber());
+    const daily = champs?.filter((item, index) => index === generateDailyNumber());
     return daily;
   };
 
   const getYesterdayChamp = async () => {
-    const champs = await getAllChamps();
-    const yesterday = champs.filter((item, index) => index === generateYesterdayNumber());
+    const yesterday = champs?.filter((item, index) => index === generateYesterdayNumber());
     return yesterday;
   };
 
